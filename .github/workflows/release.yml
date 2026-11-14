@@ -12,8 +12,8 @@ on:
 
 jobs:
   build-rpm:
-    runs-on: ubuntu-24.04
-    container: quay.io/centos/centos:stream10 #fedora:latest
+    runs-on: ubuntu-latest
+    container: sentos:latest
     steps:
       - uses: actions/checkout@v4
 
