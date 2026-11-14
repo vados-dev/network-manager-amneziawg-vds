@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.13)
 find_package(Git QUIET)
 set(PROJECT_VERSION_DEFAULT "0.9.12")
 set(PROJECT_VERSION_STRING "${PROJECT_VERSION_DEFAULT}")
-set(PROJECT_VERSION_SUFFIX "-vds")
+set(PROJECT_VERSION_SUFFIX "")
 
 if(GIT_FOUND)
     execute_process(
@@ -23,6 +23,8 @@ if(GIT_FOUND)
             set(PROJECT_VERSION_STRING "${CMAKE_MATCH_1}")
             if(CMAKE_MATCH_2)
                 set(PROJECT_VERSION_SUFFIX "${CMAKE_MATCH_2}")
+            else()
+                set(PROJECT_VERSION_SUFFIX "")
             endif()
         else()
             # Commit hash without tag, e.g., "28da31d-dirty" or "g1234567"
