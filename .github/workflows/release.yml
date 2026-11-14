@@ -8,20 +8,18 @@ on:
       version:
         description: 'Version tag'
         required: true
-        default: '0.9.5'
+        default: '0.9.12-vds'
 
 jobs:
   build-rpm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: fedora:latest
     steps:
       - uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          dnf install -y cmake gcc g++ pkg-config intltool \
-            NetworkManager-libnm-devel gtk3-devel libnma-devel \
-            glib2-devel gettext rpm-build
+          dnf install -y cmake gcc g++ pkg-config NetworkManager-libnm-devel glib2-devel rpm-build
 
       - name: Get version without v prefix
         id: version
@@ -36,7 +34,7 @@ jobs:
           cmake .. \
             -DCMAKE_INSTALL_PREFIX=/usr \
             -DCMAKE_INSTALL_LIBDIR=lib64 \
-            -DWITH_GTK3=ON \
+            -DWITH_GTK3=OFF \
             -DWITH_GTK4=OFF
           cmake --build .
 
