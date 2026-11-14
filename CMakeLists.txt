@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.13)
 
 # Get version from git tag if available, otherwise use default
 find_package(Git QUIET)
-set(PROJECT_VERSION_DEFAULT "0.9.5")
+set(PROJECT_VERSION_DEFAULT "0.9.12-vds")
 set(PROJECT_VERSION_STRING "${PROJECT_VERSION_DEFAULT}")
 set(PROJECT_VERSION_SUFFIX "")
 
