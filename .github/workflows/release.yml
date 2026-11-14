@@ -19,6 +19,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          dnf -y install dnf-plugins-core
+          dnf config-manager --set-enabled crb
+          dnf check-update -y
           dnf install -y cmake gcc g++ pkg-config NetworkManager-libnm-devel glib2-devel rpm-build
 
       - name: Get version without v prefix
