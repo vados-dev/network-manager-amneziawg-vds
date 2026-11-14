@@ -8,12 +8,12 @@ on:
       version:
         description: 'Version tag'
         required: true
-        default: '0.9.12-vds'
+        default: '0.9.12'
 
 jobs:
   build-rpm:
     runs-on: ubuntu-24.04
-    container: fedora:latest
+    container: centos:latest #fedora:latest
     steps:
       - uses: actions/checkout@v4
 
