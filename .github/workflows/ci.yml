@@ -8,7 +8,7 @@ on:
 
 jobs:
   code-style:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       
@@ -68,7 +68,7 @@ jobs:
           if-no-files-found: ignore
 
   build-centos:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: quay.io/centos/centos:stream10
     steps:
       - uses: actions/checkout@v4
