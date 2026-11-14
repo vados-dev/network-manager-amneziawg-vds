@@ -67,49 +67,6 @@ jobs:
           path: build/*.deb
           if-no-files-found: ignore
 
-  build-fedora:
-    runs-on: ubuntu-latest
-    container: fedora:latest
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Install dependencies
-        run: |
-          dnf install -y cmake gcc g++ pkg-config intltool \
-            NetworkManager-libnm-devel \
-            libnma-devel gtk3-devel \
-            libnma-gtk4-devel gtk4-devel \
-            glib2-devel gettext rpm-build
-
-      - name: Configure
-        run: |
-          mkdir build && cd build
-          cmake .. \
-            -DCMAKE_INSTALL_PREFIX=/usr \
-            -DCMAKE_INSTALL_LIBDIR=lib64 \
-            -DWITH_GTK3=ON \
-            -DWITH_GTK4=ON
-
-      - name: Build
-        run: cmake --build build --parallel $(nproc)
-
-      - name: Run tests
-        run: |
-          cd build
-          ctest --output-on-failure
-
-      - name: Build RPM package
-        run: |
-          cd build
-          cpack -G RPM
-
-      - name: Upload RPM artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: networkmanager-amneziawg-rpm
-          path: build/*.rpm
-          if-no-files-found: ignore
-
   build-centos:
     runs-on: ubuntu-latest
     container: quay.io/centos/centos:stream10
@@ -118,9 +75,10 @@ jobs:
       
       - name: Install dependencies
         run: |
-          dnf install -y cmake gcc g++ pkg-config \
-            NetworkManager-libnm-devel \
-            glib2-devel rpm-build
+          dnf -y install dnf-plugins-core
+          dnf config-manager --set-enabled crb
+          dnf check-update -y
+          dnf install -y cmake gcc g++ pkg-config NetworkManager-libnm-devel glib2-devel rpm-build
 
       - name: Configure
         run: |
