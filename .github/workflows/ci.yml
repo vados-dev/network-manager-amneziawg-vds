@@ -10,7 +10,7 @@ jobs:
   code-style:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - name: Install clang-format
         run: sudo apt-get install -y clang-format
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-24.04
     container: quay.io/centos/centos:stream10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       
       - name: Install dependencies
         run: |
